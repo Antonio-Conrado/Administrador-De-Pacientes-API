@@ -1,0 +1,21 @@
+{
+  "name": "administrador-de-pacientes-api",
+  "version": "1.0.0",
+  "description": "Administrador de pacientes API",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "José Antonio Conrado López",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.4",
+    "express": "^4.18.2",
+    "mongoose": "^8.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
