@@ -4,6 +4,7 @@ import conectarDB from './config/db.js';
 
 //import routes
 import veterinarioRoutes from  './routes/veterinarioRoutes.js';
+import pacienteRoutes from './routes/pacienteRoutes.js';
 
 
 const app = express();
@@ -15,6 +16,7 @@ conectarDB();
 
 //url de routes
 app.use('/veterinarios', veterinarioRoutes); 
+app.use('/pacientes', pacienteRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT);
