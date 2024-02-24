@@ -1,6 +1,7 @@
 import Veterinario from "../models/Veterinario.js";
 import generarJWT from "../helpers/generarJWT.js";
-import shortid from "shortid";
+import emailRegistro from '../helpers/emailRegistro.js';
+import { v4 as uuidv4 } from 'uuid';
 
 const registrar = async (req, res, next) => {
     const { email } = req.body;
@@ -14,6 +15,13 @@ const registrar = async (req, res, next) => {
     try {
         const veterinario = new Veterinario(req.body);
         await veterinario.save();
+
+        //enviar el email
+        emailRegistro({
+            email : veterinario.email,
+            nombre : veterinario.nombre,
+            token : veterinario.token 
+        });
         res.json(veterinario)
     } catch (error) {
         res.status(404).json({ msg: `${error}` })
@@ -78,7 +86,7 @@ const olvidePassword = async(req,res,next) =>{
     };
     
     try {
-        existeVeterinario.token = shortid.generate();
+        existeVeterinario.token = uuidv4();
         await existeVeterinario.save();
         res.json({msg : "Te hemos enviado un email con las instrucciones!"});
     } catch (error) {
