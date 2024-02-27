@@ -58,12 +58,13 @@ const autenticar = async (req, res, next) => {
 
     if (!usuario) {
         const error = new Error("El usuario no existe!")
-        res.status(403).json({ msg: error.message });
+        return res.status(403).json({ msg: error.message });
     } else {
         //comprobar si el usuario esta confirmado
         if (!usuario.confirmado) {
             const error = new Error("Tu cuenta no ha sído confirmada!")
             res.status(403).json({ msg: error.message });
+            return
         };
 
         if (await usuario.comprobarPassword(password)) {
@@ -137,7 +138,7 @@ const nuevoPassword = async(req,res,next) =>{
 
 const perfil = (req,res,next) =>{
     const {veterinario} = req;
-    res.json({veterinario})
+    res.json(veterinario)
 }
 export {
     registrar,
