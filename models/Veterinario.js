@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 } from 'uuid';
 import bcrypt from 'bcrypt';
 
 const veterinarioSchema = mongoose.Schema({
@@ -30,7 +30,7 @@ const veterinarioSchema = mongoose.Schema({
     },
     token : {
         type : String,
-        default :  uuidv4()
+        default :  v4
     },
     confirmado : {
         type : Boolean,
