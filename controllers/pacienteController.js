@@ -5,7 +5,7 @@ const agregarPaciente = async (req, res, next) => {
     paciente.veterinario = req.veterinario._id;
     try {
         const pacienteAlmacenado = await paciente.save();
-        res.json({ pacienteAlmacenado })
+        res.json( pacienteAlmacenado )
     } catch (error) {
         return res.status(500).json({ msg: `${error}` });
     }
@@ -59,7 +59,7 @@ const actualizarPaciente = async (req, res, next) => {
         runValidators: true
     });
 
-    res.status(200).json({msg: "Se actualizó correctamente",pacienteActualizado})
+    res.status(200).json(pacienteActualizado)
 };
 
 const eliminarPaciente = async (req, res, next) => {
