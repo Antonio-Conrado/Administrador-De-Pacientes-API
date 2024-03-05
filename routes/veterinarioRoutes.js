@@ -10,7 +10,8 @@ import {
     comprobarToken,
     nuevoPassword,
     perfil,
-    actualizarPerfil
+    actualizarPerfil,
+    actualizarPassword
 } from '../controllers/veterinarioController.js';
 
 //middleware auth
@@ -25,4 +26,5 @@ router.route('/reset-password/:token').get(comprobarToken).post(nuevoPassword);
 
 router.get('/perfil', checkAuth,perfil);
 router.put('/perfil/:id', checkAuth, actualizarPerfil);
+router.put('/actualizar-password', checkAuth, actualizarPassword);
 export default router;

@@ -182,6 +182,30 @@ const actualizarPerfil = async (req,res,next) =>{
     }
 };
 
+const actualizarPassword = async(req,res,next) =>{
+    const{id} = req.veterinario;
+    const{passwordActual, nuevoPassword, repetirNuevoPassword} = req.body;
+
+    const veterinario = await Veterinario.findById(id);
+    if(!veterinario){
+        const error = new Error('Hubo un error');
+        return res.status(400).json({msg : error.message});
+    };
+
+    if(await veterinario.comprobarPassword(passwordActual)){
+        if(nuevoPassword !== repetirNuevoPassword){
+            const error = new Error('Las contraseñas no coinciden. Por favor, asegúrate de que ambas contraseñas sean iguales!');
+            return res.status(400).json({msg : error.message});
+        }
+        veterinario.password = nuevoPassword;
+        await veterinario.save();
+        res.status(200).json({msg: 'Password actualizado correctamente!'});
+
+    }else{
+        const error = new Error('El Password actual es incorrecto!');
+        return res.status(400).json({msg : error.message});
+    }
+};
 export {
     registrar,
     cofirmarCuenta,
@@ -190,5 +214,6 @@ export {
     comprobarToken,
     nuevoPassword,
     perfil,
-    actualizarPerfil
+    actualizarPerfil,
+    actualizarPassword
 }
